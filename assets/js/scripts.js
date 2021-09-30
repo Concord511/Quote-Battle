@@ -1,9 +1,11 @@
 
 
-
+//function for random quote
 function randomQuote() {
     //make a fetch request to quote garden
-    fetch(`https://quote-garden.herokuapp.com/api/v3/quotes/random`)
+    fetch(
+      `https://quote-garden.herokuapp.com/api/v3/quotes/random`
+      )
       
     
     .then(function(randomQuote){
@@ -11,10 +13,13 @@ function randomQuote() {
     })
         .then(function(randomQuote){
           console.log(randomQuote)
+          // variable for Author's name
           const quoteAuthor = randomQuote.data[0].quoteAuthor
           console.log(quoteAuthor)
+          // variable for text of quote
           const quoteText = randomQuote.data[0].quoteText
           console.log(quoteText)
+          // variable for the genre of the quote
           const  quoteGenre = randomQuote.data[0].quoteGenre
           console.log(quoteGenre)
         })
@@ -23,9 +28,12 @@ function randomQuote() {
 randomQuote()
 
 
+//function for kanye quote
 function kanyeQuote() {
   //make a fetch request to kanye rest API
-  fetch(`https://api.kanye.rest/`)
+  fetch(
+    `https://api.kanye.rest/`
+    )
       
     
     .then(function(kanyeQuote){
@@ -34,37 +42,47 @@ function kanyeQuote() {
     
   
         .then(function(kanyeQuote){
+          console.log(kanyeQuote)
           const kanyeSaid = kanyeQuote.quote
           console.log(kanyeSaid)
   })
 }
 
 kanyeQuote()
-  
-  
-  
 
 
 
-// function myFunction() {
-  //   fetch(
-  //     // Make a fetch request to Wikipedia to get a random article title
-  //     `https://en.wikipedia.org/w/api.php?action=query&format=json&list=random&rnnamespace=0&rnlimit=1&origin=*`
-  //     //
-  //   )
-  //     .then(function(wikiResponse) {
-  //       return wikiResponse.json();
-  //     })
-  //     .then(function(wikiResponse) {
-  //       console.log(wikiResponse)
-  //       // Create a variable to hold the title of the Wikipedia article
-  //       // YOUR CODE HERE
-  //       var title = wikiResponse.query.random[0].title
-  //       // Display the article title above the GIF as a <h2> heading
-  //       // YOUR CODE HERE
-  //       var headingEl = document.createElement("h2")
-  //       headingEl.textContent = title
-  //       var responseEl = document.getElementById("response-container")
-  //       responseEl.innerHTML = ""
-  //       responseEl.appendChild(headingEl)
-  //       var rating = document.getElementById("rating").nodeValue
+
+// kanye west giphy funciton
+function kanyeGif() {
+
+// fetch request for Giphy API targeting Kanye West
+fetch(
+  'https://api.giphy.com/v1/gifs/search?q=kanye&api_key=HvaacROi9w5oQCDYHSIk42eiDSIXH3FN&limit=1'
+)
+  .then(function(response) {
+    return response.json()
+  })
+        .then(function(response) {
+    
+          // Create a variable that will select the <div> where the GIF will be displayed
+          var responseContainerEl = document.querySelector('#response-container');
+
+          // Empty out the <div> before we append a GIF to it
+          responseContainerEl.innerHTML = '';
+
+          //create an img element and attach gif source
+          var gifImg = document.createElement('img');
+          gifImg.setAttribute('src', response.data[0].images.fixed_height.url);
+
+          // Append 'gifImg' to the <div>
+          responseContainerEl.appendChild(gifImg)
+  
+  
+  })
+
+}
+
+  kanyeGif()
+
+
