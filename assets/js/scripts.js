@@ -11,12 +11,35 @@ function randomQuote() {
     })
         .then(function(randomQuote){
           console.log(randomQuote)
+          const quoteAuthor = randomQuote.data[0].quoteAuthor
+          console.log(quoteAuthor)
+          const quoteText = randomQuote.data[0].quoteText
+          console.log(quoteText)
+          const  quoteGenre = randomQuote.data[0].quoteGenre
+          console.log(quoteGenre)
         })
       }
 
 randomQuote()
 
+
+function kanyeQuote() {
+  //make a fetch request to kanye rest API
+  fetch(`https://api.kanye.rest/`)
+      
+    
+    .then(function(kanyeQuote){
+      return kanyeQuote.json()
+    })
+    
   
+        .then(function(kanyeQuote){
+          const kanyeSaid = kanyeQuote.quote
+          console.log(kanyeSaid)
+  })
+}
+
+kanyeQuote()
   
   
   
