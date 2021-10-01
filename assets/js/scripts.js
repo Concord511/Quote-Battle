@@ -1,4 +1,64 @@
+let quoteText = "";
+let quoteGardenAuthor = "";
+let quoteGardenText = "";
+let kanyeSaid = "";
+let kanyeSaidIt = false;
+let famousQuotes = [];
 
+// start button handler function
+$("#start-btn").click(function() {
+    // add classes and remove classes to show/hide buttons
+    $(this).addClass("hide")
+    $("#kanye-btn").removeClass("hide");
+    $("#someone-else-btn").removeClass("hide");
+
+    // update #welcome and #instructions text
+    $("#welcome").text("Who said...");
+    let quote = randomizeQuote();
+    $("#instructions").text(quote);
+    
+    // add quote to famousQuotes array
+    famousQuotes.push(quote);
+    
+    // call API functions again for new data
+    randomQuote();
+    kanyeQuote();
+});
+
+// create button handler for kanye button
+$("#kanye-btn").click(function() {
+  $(this).addClass("hide")
+  let startBtnEl = $("#start-btn");
+  startBtnEl.removeClass("hide").text("Next");
+  $("#someone-else-btn").addClass("hide");
+
+  // if kanyeSaidIt is true - DO STUFF
+});
+
+// create button handler for someone-else button
+$("#someone-else-btn").click(function() {
+  $(this).addClass("hide")
+  let startBtnEl = $("#start-btn");
+  startBtnEl.removeClass("hide").text("Next");
+  $("#someone-else-btn").addClass("hide");
+
+  // if kanyeSaidIt is false - DO OTHER STUFF
+});
+
+// Write a function that informs the player if their choice is right or wrong
+
+// randomize a quote to return
+let randomizeQuote = function() {
+  let randomInt = Math.floor(Math.random() * 2);
+  if (randomInt === 0) {
+    kanyeSaidIt = false;
+    return quoteGardenText;
+  }
+  else {
+    kanyeSaidIt = true;
+    return kanyeSaid;
+  }
+}
 
 //function for random quote
 function randomQuote() {
@@ -6,27 +66,18 @@ function randomQuote() {
     fetch(
       `https://quote-garden.herokuapp.com/api/v3/quotes/random`
       )
-      
-    
-    .then(function(randomQuote){
-      return randomQuote.json()
-    })
-        .then(function(randomQuote){
-          console.log(randomQuote)
-          // variable for Author's name
-          const quoteAuthor = randomQuote.data[0].quoteAuthor
-          console.log(quoteAuthor)
-          // variable for text of quote
-          const quoteText = randomQuote.data[0].quoteText
-          console.log(quoteText)
-          // variable for the genre of the quote
-          const  quoteGenre = randomQuote.data[0].quoteGenre
-          console.log(quoteGenre)
-        })
+      .then(function(randomQuote){
+        return randomQuote.json();
+      })
+      .then(function(randomQuote){
+        // variable for Author's name
+        quoteGardenAuthor = randomQuote.data[0].quoteAuthor;
+        // variable for text of quote
+        quoteGardenText = randomQuote.data[0].quoteText;
+      })
   }
 
-randomQuote()
-
+randomQuote();
 
 //function for kanye quote
 function kanyeQuote() {
@@ -34,56 +85,43 @@ function kanyeQuote() {
   fetch(
     `https://api.kanye.rest/`
     )
-      
-    
     .then(function(kanyeQuote){
-      return kanyeQuote.json()
+      return kanyeQuote.json();
     })
-    
-  
-        .then(function(kanyeQuote){
-          console.log(kanyeQuote)
-          const kanyeSaid = kanyeQuote.quote
-          console.log(kanyeSaid)
+    .then(function(kanyeQuote){
+      kanyeSaid = kanyeQuote.quote;
   })
 }
 
-kanyeQuote()
-
-
-
+kanyeQuote();
 
 // kanye west giphy funciton
-function kanyeGif() {
-
-// fetch request for Giphy API targeting Kanye West
-fetch(
-  'https://api.giphy.com/v1/gifs/search?q=smile-kanye&api_key=HvaacROi9w5oQCDYHSIk42eiDSIXH3FN&limit=1'
-)
-  .then(function(response) {
-    return response.json()
-  })
-        .then(function(response) {
-          console.log(response)
+// function kanyeGif() {
+// // fetch request for Giphy API targeting Kanye West
+//   fetch(
+//     'https://api.giphy.com/v1/gifs/search?q=smile-kanye&api_key=HvaacROi9w5oQCDYHSIk42eiDSIXH3FN&limit=1'
+//   )
+//   .then(function(response) {
+//     return response.json()
+//   })
+//         .then(function(response) {
+//           console.log(response)
     
-          // Create a variable that will select the <div> where the GIF will be displayed
-          var responseContainerEl = document.querySelector('#response-container');
+//           // Create a variable that will select the <div> where the GIF will be displayed
+//           var responseContainerEl = document.querySelector('#response-container');
 
-          // Empty out the <div> before we append a GIF to it
-          responseContainerEl.innerHTML = '';
+//           // Empty out the <div> before we append a GIF to it
+//           responseContainerEl.innerHTML = '';
 
-          //create an img element and attach gif source
-          var gifImg = document.createElement('img');
-          gifImg.setAttribute('src', response.data[0].images.fixed_height.url);
+//           //create an img element and attach gif source
+//           var gifImg = document.createElement('img');
+//           gifImg.setAttribute('src', response.data[0].images.fixed_height.url);
 
-          // Append 'gifImg' to the <div>
-          responseContainerEl.appendChild(gifImg)
-  
-  
-  })
+//           // Append 'gifImg' to the <div>
+//           responseContainerEl.appendChild(gifImg)
+//   })
+// }
 
-}
-
-  kanyeGif()
+// kanyeGif()
 
 
