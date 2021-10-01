@@ -23,7 +23,7 @@ function randomQuote() {
           const  quoteGenre = randomQuote.data[0].quoteGenre
           console.log(quoteGenre)
         })
-      }
+  }
 
 randomQuote()
 
@@ -58,12 +58,13 @@ function kanyeGif() {
 
 // fetch request for Giphy API targeting Kanye West
 fetch(
-  'https://api.giphy.com/v1/gifs/search?q=kanye&api_key=HvaacROi9w5oQCDYHSIk42eiDSIXH3FN&limit=1'
+  'https://api.giphy.com/v1/gifs/search?q=smile-kanye&api_key=HvaacROi9w5oQCDYHSIk42eiDSIXH3FN&limit=1'
 )
   .then(function(response) {
     return response.json()
   })
         .then(function(response) {
+          console.log(response)
     
           // Create a variable that will select the <div> where the GIF will be displayed
           var responseContainerEl = document.querySelector('#response-container');
