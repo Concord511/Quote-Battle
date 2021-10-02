@@ -1,9 +1,13 @@
-let quoteText = "";
 let quoteGardenAuthor = "";
 let quoteGardenText = "";
 let kanyeSaid = "";
 let kanyeSaidIt = false;
-let famousQuotes = [];
+let correctAnswers = 0;
+//variables for timer
+const timeEl = $(".timer")
+console.log(timeEl)
+let timer 
+
 
 // start button handler function
 $("#start-btn").click(function() {
@@ -17,23 +21,32 @@ $("#start-btn").click(function() {
     let quote = randomizeQuote();
     $("#instructions").text(quote);
     
-    // add quote to famousQuotes array
-    famousQuotes.push(quote);
     
     // call API functions again for new data
     randomQuote();
     kanyeQuote();
+    
+    //call countdown function put it here just to test functionality.  Should be in kanye button and someone else button
+    clock()
 });
 
 // create button handler for kanye button
 $("#kanye-btn").click(function() {
+  
   $(this).addClass("hide")
   let startBtnEl = $("#start-btn");
   startBtnEl.removeClass("hide").text("Next");
   $("#someone-else-btn").addClass("hide");
 
   // if kanyeSaidIt is true - DO STUFF
+  clearInterval(timer);
+  if (kanyeSaidIt === true) {
+    answerIsCorrect()
+    
+  }else answerIsWrong()
+
 });
+
 
 // create button handler for someone-else button
 $("#someone-else-btn").click(function() {
@@ -43,13 +56,33 @@ $("#someone-else-btn").click(function() {
   $("#someone-else-btn").addClass("hide");
 
   // if kanyeSaidIt is false - DO OTHER STUFF
+  clearInterval(timer);
+  if (kanyeSaidIt === false) {
+     answerIsCorrect()
+  }else answerIsWrong()
 });
 
-// Write a function that informs the player if their choice is right or wrong
+
+
+
+  
+function answerIsCorrect(){
+  $("#welcome").text("")
+  $("#instructions").text("Correct")
+  correctAnswers++
+  
+}
+
+function answerIsWrong(){
+  $("#welcome").text("")
+  $("#instructions").text("Wrong")
+}
+
+
 
 // randomize a quote to return
 let randomizeQuote = function() {
-  let randomInt = Math.floor(Math.random() * 2);
+  let randomInt = Math.floor(Math.random() * 2)
   if (randomInt === 0) {
     kanyeSaidIt = false;
     return quoteGardenText;
@@ -95,7 +128,7 @@ function kanyeQuote() {
 
 kanyeQuote();
 
-// kanye west giphy funciton
+//kanye west giphy funciton
 // function kanyeGif() {
 // // fetch request for Giphy API targeting Kanye West
 //   fetch(
@@ -108,7 +141,7 @@ kanyeQuote();
 //           console.log(response)
     
 //           // Create a variable that will select the <div> where the GIF will be displayed
-//           var responseContainerEl = document.querySelector('#response-container');
+//           let responseContainerEl = document.querySelector('#response-container');
 
 //           // Empty out the <div> before we append a GIF to it
 //           responseContainerEl.innerHTML = '';
@@ -125,3 +158,23 @@ kanyeQuote();
 // kanyeGif()
 
 
+//function for countdown
+function countdown(){
+  
+  if(timeleft <= 0){
+      clearInterval(timer);
+      timeEl.text(timeleft)
+  } else {
+      timeEl.text(timeleft + " seconds remaining");
+      }
+      timeleft--;
+      
+
+}
+//function for countdown to commense
+function clock() {
+  clearInterval(timer)
+      timeleft = 10
+      countdown();
+      timer = setInterval (countdown,1000);
+}
