@@ -41,7 +41,7 @@ $("#kanye-btn").click(function() {
   $("#someone-else-btn").addClass("hide");
 
   // if kanyeSaidIt is true - DO STUFF
-  if (kanyeSaidIt === true && $(this) === true) {
+  if (kanyeSaidIt === true && $(this)) {
     return answerIsCorrect()
     
   }else answerIsWrong()
@@ -57,9 +57,9 @@ $("#someone-else-btn").click(function() {
   $("#someone-else-btn").addClass("hide");
 
   // if kanyeSaidIt is false - DO OTHER STUFF
-  if (kanyeSaidIt === true && $(this) === true) {
-    return answerIsWrong()
-  }
+  if (kanyeSaidIt === false && $(this)) {
+    return answerIsCorrect()
+  }else answerIsWrong()
 });
 
 
@@ -67,20 +67,21 @@ $("#someone-else-btn").click(function() {
 
   
 function answerIsCorrect(){
+  $("#welcome").text("")
   $("#instructions").text("Correct")
   
 }
 
 function answerIsWrong(){
-  $("#instructions").text("Correct")
+  $("#welcome").text("")
+  $("#instructions").text("Wrong")
 }
 
-// checkAnswer()
-// console.log(checkAnswer())
+
 
 // randomize a quote to return
 let randomizeQuote = function() {
-  let randomInt = (math.Floor(math.Random() * 2))
+  let randomInt = Math.floor(Math.random() * 2)
   if (randomInt === 0) {
     kanyeSaidIt = false;
     return quoteGardenText;
