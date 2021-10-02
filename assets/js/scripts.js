@@ -4,6 +4,9 @@ let quoteGardenText = "";
 let kanyeSaid = "";
 let kanyeSaidIt = false;
 let famousQuotes = [];
+//variables for timer
+const timeEl = document.querySelector(".timer")
+let timer 
 
 // start button handler function
 $("#start-btn").click(function() {
@@ -23,6 +26,9 @@ $("#start-btn").click(function() {
     // call API functions again for new data
     randomQuote();
     kanyeQuote();
+    
+    //call countdown function put it here just to test functionality.  Should be in kanye button and someone else button
+    clock()
 });
 
 // create button handler for kanye button
@@ -125,3 +131,23 @@ kanyeQuote();
 // kanyeGif()
 
 
+//function for countdown
+function countdown(){
+  
+  if(timeleft <= 0){
+      clearInterval(timer);
+      timeEl.innerHTML = timeleft
+  } else {
+      timeEl.innerHTML = timeleft + " seconds remaining";
+      }
+      timeleft--;
+      
+
+}
+//function for countdown to commense
+function clock() {
+  clearInterval(timer)
+      timeleft = 10
+      countdown();
+      timer = setInterval (countdown,1000);
+}
