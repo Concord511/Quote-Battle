@@ -8,6 +8,7 @@ let famousQuotes = [];
 const timeEl = document.querySelector(".timer")
 let timer 
 
+
 // start button handler function
 $("#start-btn").click(function() {
     // add classes and remove classes to show/hide buttons
@@ -33,13 +34,20 @@ $("#start-btn").click(function() {
 
 // create button handler for kanye button
 $("#kanye-btn").click(function() {
+  
   $(this).addClass("hide")
   let startBtnEl = $("#start-btn");
   startBtnEl.removeClass("hide").text("Next");
   $("#someone-else-btn").addClass("hide");
 
   // if kanyeSaidIt is true - DO STUFF
+  if (kanyeSaidIt === true && $(this) === true) {
+    return answerIsCorrect()
+    
+  }else answerIsWrong()
+
 });
+console.log(answerIsCorrect())
 
 // create button handler for someone-else button
 $("#someone-else-btn").click(function() {
@@ -49,13 +57,30 @@ $("#someone-else-btn").click(function() {
   $("#someone-else-btn").addClass("hide");
 
   // if kanyeSaidIt is false - DO OTHER STUFF
+  if (kanyeSaidIt === true && $(this) === true) {
+    return answerIsWrong()
+  }
 });
 
-// Write a function that informs the player if their choice is right or wrong
+
+
+
+  
+function answerIsCorrect(){
+  $("#instructions").text("Correct")
+  
+}
+
+function answerIsWrong(){
+  $("#instructions").text("Correct")
+}
+
+// checkAnswer()
+// console.log(checkAnswer())
 
 // randomize a quote to return
 let randomizeQuote = function() {
-  let randomInt = Math.floor(Math.random() * 2);
+  let randomInt = (math.Floor(math.Random() * 2))
   if (randomInt === 0) {
     kanyeSaidIt = false;
     return quoteGardenText;
