@@ -1,11 +1,11 @@
-let quoteText = "";
 let quoteGardenAuthor = "";
 let quoteGardenText = "";
 let kanyeSaid = "";
 let kanyeSaidIt = false;
-let famousQuotes = [];
+let correctAnswers = 0;
 //variables for timer
-const timeEl = document.querySelector(".timer")
+const timeEl = $(".timer")
+console.log(timeEl)
 let timer 
 
 
@@ -21,8 +21,6 @@ $("#start-btn").click(function() {
     let quote = randomizeQuote();
     $("#instructions").text(quote);
     
-    // add quote to famousQuotes array
-    famousQuotes.push(quote);
     
     // call API functions again for new data
     randomQuote();
@@ -41,13 +39,14 @@ $("#kanye-btn").click(function() {
   $("#someone-else-btn").addClass("hide");
 
   // if kanyeSaidIt is true - DO STUFF
-  if (kanyeSaidIt === true && $(this)) {
-    return answerIsCorrect()
+  clearInterval(timer);
+  if (kanyeSaidIt === true) {
+    answerIsCorrect()
     
   }else answerIsWrong()
 
 });
-console.log(answerIsCorrect())
+
 
 // create button handler for someone-else button
 $("#someone-else-btn").click(function() {
@@ -57,8 +56,9 @@ $("#someone-else-btn").click(function() {
   $("#someone-else-btn").addClass("hide");
 
   // if kanyeSaidIt is false - DO OTHER STUFF
-  if (kanyeSaidIt === false && $(this)) {
-    return answerIsCorrect()
+  clearInterval(timer);
+  if (kanyeSaidIt === false) {
+     answerIsCorrect()
   }else answerIsWrong()
 });
 
@@ -69,6 +69,7 @@ $("#someone-else-btn").click(function() {
 function answerIsCorrect(){
   $("#welcome").text("")
   $("#instructions").text("Correct")
+  correctAnswers++
   
 }
 
@@ -127,7 +128,7 @@ function kanyeQuote() {
 
 kanyeQuote();
 
-// kanye west giphy funciton
+//kanye west giphy funciton
 // function kanyeGif() {
 // // fetch request for Giphy API targeting Kanye West
 //   fetch(
@@ -140,7 +141,7 @@ kanyeQuote();
 //           console.log(response)
     
 //           // Create a variable that will select the <div> where the GIF will be displayed
-//           var responseContainerEl = document.querySelector('#response-container');
+//           let responseContainerEl = document.querySelector('#response-container');
 
 //           // Empty out the <div> before we append a GIF to it
 //           responseContainerEl.innerHTML = '';
@@ -162,9 +163,9 @@ function countdown(){
   
   if(timeleft <= 0){
       clearInterval(timer);
-      timeEl.innerHTML = timeleft
+      timeEl.text(timeleft)
   } else {
-      timeEl.innerHTML = timeleft + " seconds remaining";
+      timeEl.text(timeleft + " seconds remaining");
       }
       timeleft--;
       
