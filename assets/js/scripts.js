@@ -1,84 +1,90 @@
+// TO DO:
+// add modal code to start-btn handler else section
+// add save score to localStorage function
+// add load score to localStorage function
+
 let quoteGardenAuthor = "";
 let quoteGardenText = "";
 let kanyeSaid = "";
 let kanyeSaidIt = false;
 let correctAnswers = 0;
 //variables for timer
-const timeEl = $(".timer")
-console.log(timeEl)
-let timer 
-
+let answersLeft = 10;
+const timeEl = $(".timer");
+let timer;
 
 // start button handler function
 $("#start-btn").click(function() {
-    // add classes and remove classes to show/hide buttons
-    $(this).addClass("hide")
-    $("#kanye-btn").removeClass("hide");
-    $("#someone-else-btn").removeClass("hide");
+    if (answersLeft > 0) { 
+      // add classes and remove classes to show/hide buttons
+      $(this).addClass("hide").text("Next");
+      $("#kanye-btn").removeClass("hide");
+      $("#someone-else-btn").removeClass("hide");
 
-    // update #welcome and #instructions text
-    $("#welcome").text("Who said...");
-    let quote = randomizeQuote();
-    $("#instructions").text(quote);
-    
-    
-    // call API functions again for new data
-    randomQuote();
-    kanyeQuote();
-    
-    //call countdown function put it here just to test functionality.  Should be in kanye button and someone else button
-    clock()
+      // update #welcome and #instructions text
+      $("#welcome").text("Who said...");
+      let quote = randomizeQuote();
+      $("#instructions").text(quote);
+      answersLeft--;
+
+      // call API functions again for new data
+      randomQuote();
+      kanyeQuote();
+      
+      //call countdown function put it here just to test functionality.  Should be in kanye button and someone else button
+      clock()
+    }
+    else {
+      // pull up modal and show score
+    }
 });
 
 // create button handler for kanye button
 $("#kanye-btn").click(function() {
-  
   $(this).addClass("hide")
-  let startBtnEl = $("#start-btn");
-  startBtnEl.removeClass("hide").text("Next");
+  $("#start-btn").removeClass("hide");
   $("#someone-else-btn").addClass("hide");
 
   // if kanyeSaidIt is true - DO STUFF
   clearInterval(timer);
   if (kanyeSaidIt === true) {
     answerIsCorrect()
-    
   }else answerIsWrong()
-
 });
-
 
 // create button handler for someone-else button
 $("#someone-else-btn").click(function() {
   $(this).addClass("hide")
-  let startBtnEl = $("#start-btn");
-  startBtnEl.removeClass("hide").text("Next");
+  $("#start-btn").removeClass("hide");
   $("#someone-else-btn").addClass("hide");
 
   // if kanyeSaidIt is false - DO OTHER STUFF
   clearInterval(timer);
   if (kanyeSaidIt === false) {
-     answerIsCorrect()
-  }else answerIsWrong()
+     answerIsCorrect();
+  }else answerIsWrong();
 });
 
-
-
-
-  
 function answerIsCorrect(){
-  $("#welcome").text("")
-  $("#instructions").text("Correct")
-  correctAnswers++
-  
+  if (kanyeSaidIt === true) {
+    $("#instructions").text("Kanye West");
+  }
+  else {
+    $("#instructions").text(quoteGardenAuthor);
+  }
+  $("#welcome").text("Correct");
+  correctAnswers++;
 }
 
 function answerIsWrong(){
-  $("#welcome").text("")
-  $("#instructions").text("Wrong")
+  if (kanyeSaidIt === true) {
+    $("#instructions").text("Kanye West");
+  }
+  else {
+    $("#instructions").text(quoteGardenAuthor);
+  }
+  $("#welcome").text("Wrong");
 }
-
-
 
 // randomize a quote to return
 let randomizeQuote = function() {
@@ -103,14 +109,17 @@ function randomQuote() {
         return randomQuote.json();
       })
       .then(function(randomQuote){
-        // variable for Author's name
-        quoteGardenAuthor = randomQuote.data[0].quoteAuthor;
-        // variable for text of quote
-        quoteGardenText = randomQuote.data[0].quoteText;
+        if (randomQuote.data[0].quoteAuthor === "Kanye West") {
+          randomQuote();
+        }
+        else {
+          // variable for Author's name
+          quoteGardenAuthor = randomQuote.data[0].quoteAuthor;
+          // variable for text of quote
+          quoteGardenText = randomQuote.data[0].quoteText;
+        }
       })
-  }
-
-randomQuote();
+}
 
 //function for kanye quote
 function kanyeQuote() {
@@ -125,8 +134,6 @@ function kanyeQuote() {
       kanyeSaid = kanyeQuote.quote;
   })
 }
-
-kanyeQuote();
 
 //kanye west giphy funciton
 // function kanyeGif() {
@@ -154,23 +161,22 @@ kanyeQuote();
 //           responseContainerEl.appendChild(gifImg)
 //   })
 // }
-
 // kanyeGif()
-
 
 //function for countdown
 function countdown(){
-  
   if(timeleft <= 0){
       clearInterval(timer);
-      timeEl.text(timeleft)
+      timeEl.text("Out of Time!");
+      $("#kanye-btn").addClass("hide");
+      $("#someone-else-btn").addClass("hide");
+      $("#start-btn").removeClass("hide");
   } else {
       timeEl.text(timeleft + " seconds remaining");
       }
       timeleft--;
-      
-
 }
+
 //function for countdown to commense
 function clock() {
   clearInterval(timer)
@@ -178,3 +184,6 @@ function clock() {
       countdown();
       timer = setInterval (countdown,1000);
 }
+
+randomQuote();
+kanyeQuote();
