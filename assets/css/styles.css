@@ -1,0 +1,20 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Merriweather Sans', sans-serif;
+}
+
+header{
+    background: #3C4F77;
+    text-align: center;
+    padding: 10px;
+}
+
+
+.hero {
+    background: url("./images/kanye.jpg");
+    background-size: cover;
+    position: relative;
+
+}
