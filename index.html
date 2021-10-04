@@ -10,19 +10,28 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300;400&display=swap" rel="stylesheet">
+<<<<<<< HEAD
 
+=======
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300;400&display=swap" rel="stylesheet">
+>>>>>>> 150807ad830e044d3df8f1bb546f6e2731b2649a
     <title>Kanye Guess</title>
   </head>
   <body>
-    <header>
-      <h1 class="title is-1 has-text-white">Kanye Guess</h1>
-      <h1 class="is-size-7">Kanye Guess</h1>
+
+    <header class>
+      <h1 class="has-text-white is-size-3">Kanye Guess</h1>
+      <p class="has-text-white subtitle timer  ">Time:</p>
+      <div >
+        <a class="has-text-white" href="./highscores.html">View Highscores</a>
+      </div>
+
     </header>
     <main>
       <section class="hero is-success is-halfheight is-link">
         <div class="hero-body">
-          <p class="subtitle timer is-flex-direction-column">Time:</p>
-          <a href="./highscores.html">View Highscores</a>
+        
           </div>
       </section>
       <section class="container hide">
@@ -36,14 +45,50 @@
         </p>
         </div>
         <div class="py-4 has-text-centered btn-container">
-            <button id="kanye-btn" class="hide">Kanye</button>
-            <button id="start-btn">Start</button>
-            <button id="someone-else-btn" class="hide">Someone Else</button>
+
+            <button class="mx-1 is-size-4" id="kanye-btn" class="hide">Kanye</button>
+            <button class="mx-1 is-size-4" id="start-btn">Start</button>
+            <button class="mx-1 is-size-4" id="someone-else-btn" class="hide">Someone Else</button>
+
+            <button id="kanye-btn" class="button is-primary">Kanye</button>
+            <button id="start-btn" class="button is-primary">Start</button>
+            <button id="someone-else-btn" class="button is-primary">Someone Else</button>
+
         </div>
-      </section>
     </main>
+
     <footer>
 
+    </footer>
+
+    <!-- modal-->
+
+    <div class="modal is-active" id="modal">
+       <div class ="modal-background"></div>
+       <div class="modal-card has-background-white py-5 px-5">
+         <header class="modal-card-head">
+           <p class="modal-card-title">
+             All Done! Your Score is...
+           </p>
+           <button id="close" class="delete is-large" aria-label="close"></button>
+         </header>
+         <section class="modal-card-body py-6">
+           <ol id="scoresList"></ol>
+         </section>
+         <footer class="modal-card-foot is-justify-content-space-around">
+           <input class="mx-5 is-size-4" id="inputName" placeholder="Enter Initials" type="text">
+           <button class="is-size-4 mx-5" type="submit">Submit</button>
+         </footer>
+       
+
+       
+
+
+    <footer class="card-footer-item">
+      <figure class="image is-16x16px">
+        <img src="./assets/css/images/Kanye West Graduation Bear.png">
+      </figure>
+    </figure></a>
     </footer>
 
     <script

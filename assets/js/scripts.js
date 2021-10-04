@@ -204,12 +204,22 @@ function clock() {
       timer = setInterval (countdown,1000);
 }
 
+
+// modal functionality
+
+
+$('#close').click(function(){
+    $('.modal').removeClass('is-active');
+});
+
+=======
 //results
 
 function showResult(){
   let scoreTag = '<span>a You got <p>'+ userScore +'</p> out of <p>'+ questions.length +'</p></span>';
   scoreText.innerHTML = scoreTag; 
 }
+
 
 randomQuote();
 kanyeQuote();
