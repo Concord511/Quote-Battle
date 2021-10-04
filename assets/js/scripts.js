@@ -185,5 +185,13 @@ function clock() {
       timer = setInterval (countdown,1000);
 }
 
+// modal functionality
+
+
+$('#close').click(function(){
+    $('.modal').removeClass('is-active');
+});
+
+
 randomQuote();
 kanyeQuote();

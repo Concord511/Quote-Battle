@@ -7,22 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
     <link rel="stylesheet" href="assets/css/styles.css" />
-<<<<<<< HEAD
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300;400&display=swap" rel="stylesheet">
-=======
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
->>>>>>> initial-styling
     <title>Kanye Guess</title>
   </head>
   <body>
     <header>
-<<<<<<< HEAD
-      <h1 class="title is-1 has-text-white">Kanye Guess</h1>
-=======
       <h1 class="is-size-7">Kanye Guess</h1>
->>>>>>> initial-styling
     </header>
     <main>
       <section class="hero is-success is-halfheight is-link">
@@ -42,15 +35,37 @@
         </p>
         </div>
         <div class="py-4 has-text-centered btn-container">
-            <button id="kanye-btn" class="hide">Kanye</button>
-            <button id="start-btn">Start</button>
-            <button id="someone-else-btn" class="hide">Someone Else</button>
+            <button class="mx-1 is-size-4" id="kanye-btn" class="hide">Kanye</button>
+            <button class="mx-1 is-size-4" id="start-btn">Start</button>
+            <button class="mx-1 is-size-4" id="someone-else-btn" class="hide">Someone Else</button>
         </div>
-      </section>
     </main>
+
     <footer>
 
     </footer>
+
+    <!-- modal-->
+
+    <div class="modal is-active" id="modal">
+       <div class ="modal-background"></div>
+       <div class="modal-card has-background-white py-5 px-5">
+         <header class="modal-card-head">
+           <p class="modal-card-title">
+             All Done! Your Score is...
+           </p>
+           <button id="close" class="delete is-large" aria-label="close"></button>
+         </header>
+         <section class="modal-card-body py-6">
+           <ol id="scoresList"></ol>
+         </section>
+         <footer class="modal-card-foot is-justify-content-space-around">
+           <input class="mx-5 is-size-4" id="inputName" placeholder="Enter Initials" type="text">
+           <button class="is-size-4 mx-5" type="submit">Submit</button>
+         </footer>
+       
+
+       
 
     <script
   src="https://code.jquery.com/jquery-3.6.0.min.js"
