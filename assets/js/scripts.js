@@ -13,9 +13,6 @@ let playerScore = {
   score: 0
 };
 
-
-
-
 // start button handler function
 $("#start-btn").click(function() {
     if (answersLeft > 0) { 
@@ -40,11 +37,13 @@ $("#start-btn").click(function() {
     else {
       $("#modal").addClass("is-active");
       $("#playerScore").text(correctAnswers);
+      displayHighScores();
     }
 });
 
 
-//submit button
+
+// submit button
 $('#submit-btn').click(function(event){
   event.preventDefault();
   let initials = $('#inputName').val().trim();
@@ -52,15 +51,16 @@ $('#submit-btn').click(function(event){
   playerScore.score = correctAnswers;
   scoresObj.push(playerScore);
   $("#modal-footer").addClass("is-hidden");
+  saveScores();
+  displayHighScores();
 });
-
 
 // create button handler for kanye button
 $("#kanye-btn").click(function() {
   $(this).addClass("is-hidden")
   $("#start-btn").removeClass("is-hidden");
   $("#someone-else-btn").addClass("is-hidden");
-
+  
   // if kanyeSaidIt is true - DO STUFF
   clearInterval(timer);
   if (kanyeSaidIt === true) {
@@ -73,28 +73,46 @@ $("#someone-else-btn").click(function() {
   $(this).addClass("is-hidden")
   $("#start-btn").removeClass("is-hidden");
   $("#kanye-btn").addClass("is-hidden");
-
+  
   // if kanyeSaidIt is false - DO OTHER STUFF
   clearInterval(timer);
   if (kanyeSaidIt === false) {
-     answerIsCorrect();
+    answerIsCorrect();
   }else answerIsWrong();
 });
 
+// function to display high scores to modal
+let displayHighScores = function() {
+  $("#scoresList").children().remove();
+  for (let i = 0; i < scoresObj.length; i++) {
+    let listEl = $("<li>");
+    let initialsEl = $("<span>").text(scoresObj[i].initials);
+    let scoreEl = $("<span>").text(scoresObj[i].score);
+    listEl.append(initialsEl);
+    listEl.append(scoreEl);
+    $("#scoresList").append(listEl);
+  }
+}
+
+// saves scores to localStorage
 var saveScores = function(){
-    localStorage.setItem("savedScores", JSON.stringify(scoreObj));
+  localStorage.setItem("savedScores", JSON.stringify(scoresObj));
 }
 
+// loads scores from localStorage
 var loadScores = function(){
-    var loadedScores = JSON.parse(localStorage.getItem(savedScores));
-    if (!loadScores) {
-      scoresObj = [];
-    }
-    else {
-      scoresObj = loadedScores;
-    }
+  var loadedScores = JSON.parse(localStorage.getItem("savedScores"));
+  if (!loadedScores) {
+    console.log("loadScores was null.");
+    scoresObj = [];
+  }
+  else {
+    console.log("loadScores was NOT null.");
+    scoresObj = loadedScores;
+  }
 }
 
+// function to execute when correctly answered
 function answerIsCorrect(){
   if (kanyeSaidIt === true) {
     $("#instructions").text("Kanye West");
@@ -106,6 +124,7 @@ function answerIsCorrect(){
   correctAnswers++;
 }
 
+// function to execute when incorrectly answered
 function answerIsWrong(){
   if (kanyeSaidIt === true) {
     $("#instructions").text("Kanye West");
@@ -226,5 +245,6 @@ function showResult(){
   scoreText.innerHTML = scoreTag; 
 }
 
+loadScores();
 randomQuote();
 kanyeQuote();
