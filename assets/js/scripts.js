@@ -8,6 +8,13 @@ let answersLeft = 10;
 const timeEl = $(".timer");
 let timer;
 let scoresObj = [];
+let playerScore = { 
+  initials: "", 
+  score: 0
+};
+
+
+
 
 // start button handler function
 $("#start-btn").click(function() {
@@ -32,8 +39,21 @@ $("#start-btn").click(function() {
     }
     else {
       $("#modal").addClass("is-active");
+      $("#playerScore").text(correctAnswers);
     }
 });
+
+
+//submit button
+$('#submit-btn').click(function(event){
+  event.preventDefault();
+  let initials = $('#inputName').val().trim();
+  playerScore.initials = initials;
+  playerScore.score = correctAnswers;
+  scoresObj.push(playerScore);
+  $("#modal-footer").addClass("is-hidden");
+});
+
 
 // create button handler for kanye button
 $("#kanye-btn").click(function() {
