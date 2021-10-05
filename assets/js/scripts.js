@@ -1,6 +1,3 @@
-// TO DO:
-// add modal code to start-btn handler else section
-
 let quoteGardenAuthor = "";
 let quoteGardenText = "";
 let kanyeSaid = "";
@@ -10,17 +7,22 @@ let correctAnswers = 0;
 let answersLeft = 10;
 const timeEl = $(".timer");
 let timer;
-
 let scoresObj = [];
+let playerScore = { 
+  initials: "", 
+  score: 0
+};
+
+
 
 
 // start button handler function
 $("#start-btn").click(function() {
     if (answersLeft > 0) { 
       // add classes and remove classes to show/hide buttons
-      $(this).addClass("hide").text("Next");
-      $("#kanye-btn").removeClass("hide");
-      $("#someone-else-btn").removeClass("hide");
+      $(this).addClass("is-hidden").text("Next");
+      $("#kanye-btn").removeClass("is-hidden");
+      $("#someone-else-btn").removeClass("is-hidden");
 
       // update #welcome and #instructions text
       $("#welcome").text("Who said...");
@@ -36,15 +38,28 @@ $("#start-btn").click(function() {
       clock()
     }
     else {
-      // pull up modal and show score
+      $("#modal").addClass("is-active");
+      $("#playerScore").text(correctAnswers);
     }
 });
 
+
+//submit button
+$('#submit-btn').click(function(event){
+  event.preventDefault();
+  let initials = $('#inputName').val().trim();
+  playerScore.initials = initials;
+  playerScore.score = correctAnswers;
+  scoresObj.push(playerScore);
+  $("#modal-footer").addClass("is-hidden");
+});
+
+
 // create button handler for kanye button
 $("#kanye-btn").click(function() {
-  $(this).addClass("hide")
-  $("#start-btn").removeClass("hide");
-  $("#someone-else-btn").addClass("hide");
+  $(this).addClass("is-hidden")
+  $("#start-btn").removeClass("is-hidden");
+  $("#someone-else-btn").addClass("is-hidden");
 
   // if kanyeSaidIt is true - DO STUFF
   clearInterval(timer);
@@ -55,9 +70,9 @@ $("#kanye-btn").click(function() {
 
 // create button handler for someone-else button
 $("#someone-else-btn").click(function() {
-  $(this).addClass("hide")
-  $("#start-btn").removeClass("hide");
-  $("#someone-else-btn").addClass("hide");
+  $(this).addClass("is-hidden")
+  $("#start-btn").removeClass("is-hidden");
+  $("#kanye-btn").addClass("is-hidden");
 
   // if kanyeSaidIt is false - DO OTHER STUFF
   clearInterval(timer);
@@ -66,11 +81,9 @@ $("#someone-else-btn").click(function() {
   }else answerIsWrong();
 });
 
-
 var saveScores = function(){
     localStorage.setItem("savedScores", JSON.stringify(scoreObj));
 }
-
 
 var loadScores = function(){
     var loadedScores = JSON.parse(localStorage.getItem(savedScores));
@@ -81,8 +94,6 @@ var loadScores = function(){
       scoresObj = loadedScores;
     }
 }
-
-
 
 function answerIsCorrect(){
   if (kanyeSaidIt === true) {
@@ -204,22 +215,16 @@ function clock() {
       timer = setInterval (countdown,1000);
 }
 
-
 // modal functionality
-
-
 $('#close').click(function(){
     $('.modal').removeClass('is-active');
 });
 
-=======
 //results
-
 function showResult(){
   let scoreTag = '<span>a You got <p>'+ userScore +'</p> out of <p>'+ questions.length +'</p></span>';
   scoreText.innerHTML = scoreTag; 
 }
-
 
 randomQuote();
 kanyeQuote();
