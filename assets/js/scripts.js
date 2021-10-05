@@ -1,7 +1,5 @@
 // TO DO:
 // add modal code to start-btn handler else section
-// add save score to localStorage function
-// add load score to localStorage function
 
 let quoteGardenAuthor = "";
 let quoteGardenText = "";
@@ -12,6 +10,9 @@ let correctAnswers = 0;
 let answersLeft = 10;
 const timeEl = $(".timer");
 let timer;
+
+let scoresObj = [];
+
 
 // start button handler function
 $("#start-btn").click(function() {
@@ -64,6 +65,24 @@ $("#someone-else-btn").click(function() {
      answerIsCorrect();
   }else answerIsWrong();
 });
+
+
+var saveScores = function(){
+    localStorage.setItem("savedScores", JSON.stringify(scoreObj));
+}
+
+
+var loadScores = function(){
+    var loadedScores = JSON.parse(localStorage.getItem(savedScores));
+    if (!loadScores) {
+      scoresObj = [];
+    }
+    else {
+      scoresObj = loadedScores;
+    }
+}
+
+
 
 function answerIsCorrect(){
   if (kanyeSaidIt === true) {
@@ -184,6 +203,23 @@ function clock() {
       countdown();
       timer = setInterval (countdown,1000);
 }
+
+
+// modal functionality
+
+
+$('#close').click(function(){
+    $('.modal').removeClass('is-active');
+});
+
+=======
+//results
+
+function showResult(){
+  let scoreTag = '<span>a You got <p>'+ userScore +'</p> out of <p>'+ questions.length +'</p></span>';
+  scoreText.innerHTML = scoreTag; 
+}
+
 
 randomQuote();
 kanyeQuote();

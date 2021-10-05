@@ -1,3 +1,5 @@
+@import "../node_modules/bulma/css/bulma.css";
+
 *{
     margin: 0;
     padding: 0;
@@ -12,9 +14,16 @@ header{
 }
 
 
+
+
 .hero {
-    background: url("./images/kanye.jpg");
+    background: url("./images/kanye-banner_01.jpg");
     background-size: cover;
     position: relative;
 
 }
+
+.is-primary {
+    background-color: #3C4F77 !important;
+    color: white;
+  }
