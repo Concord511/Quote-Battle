@@ -41,8 +41,6 @@ $("#start-btn").click(function() {
     }
 });
 
-
-
 // submit button
 $('#submit-btn').click(function(event){
   event.preventDefault();
@@ -51,6 +49,7 @@ $('#submit-btn').click(function(event){
   playerScore.score = correctAnswers;
   scoresObj.push(playerScore);
   $("#modal-footer").addClass("is-hidden");
+  sortHighScores(scoresObj);
   saveScores();
   displayHighScores();
 });
@@ -81,6 +80,21 @@ $("#someone-else-btn").click(function() {
   }else answerIsWrong();
 });
 
+// close modal button handler
+$('#close').click(function(){
+  $('.modal').removeClass('is-active');
+  location.reload();
+  // currentScore = 0;
+  // playerScore.initials = "";
+  // playerScore.score = 0;
+  // answersLeft = 10;
+  // randomQuote();
+  // kanyeQuote();
+  // $("#start-btn").text("Start");
+  // $("#welcome").text('Welcome to Kanye Guess, the game of "famous" quotes');
+  // $("#instructions").text("An epic quote battle between the greatest minds in history and Kanye West.\nYou will be presented with a quote, then pick if Kanye said it or someone else. You have 10 seconds for each quote. There will be a total of 10 quotes.\nGood luck!");
+});
+
 // function to display high scores to modal
 let displayHighScores = function() {
   $("#scoresList").children().remove();
@@ -103,13 +117,20 @@ var saveScores = function(){
 var loadScores = function(){
   var loadedScores = JSON.parse(localStorage.getItem("savedScores"));
   if (!loadedScores) {
-    console.log("loadScores was null.");
     scoresObj = [];
   }
   else {
-    console.log("loadScores was NOT null.");
     scoresObj = loadedScores;
   }
+}
+
+// sorts array
+var sortHighScores = function(highScoresArray) {
+  var newArray = highScoresArray;
+  newArray.sort(function(a, b) {
+      return b.score - a.score;
+  })
+  highScores = newArray;
 }
 
 // function to execute when correctly answered
@@ -233,11 +254,6 @@ function clock() {
       countdown();
       timer = setInterval (countdown,1000);
 }
-
-// modal functionality
-$('#close').click(function(){
-    $('.modal').removeClass('is-active');
-});
 
 //results
 function showResult(){
