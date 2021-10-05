@@ -1,6 +1,3 @@
-// TO DO:
-// add modal code to start-btn handler else section
-
 let quoteGardenAuthor = "";
 let quoteGardenText = "";
 let kanyeSaid = "";
@@ -10,17 +7,19 @@ let correctAnswers = 0;
 let answersLeft = 10;
 const timeEl = $(".timer");
 let timer;
-
 let scoresObj = [];
-
+let playerScore = { 
+  initials: "", 
+  score: 0
+};
 
 // start button handler function
 $("#start-btn").click(function() {
     if (answersLeft > 0) { 
       // add classes and remove classes to show/hide buttons
-      $(this).addClass("hide").text("Next");
-      $("#kanye-btn").removeClass("hide");
-      $("#someone-else-btn").removeClass("hide");
+      $(this).addClass("is-hidden").text("Next");
+      $("#kanye-btn").removeClass("is-hidden");
+      $("#someone-else-btn").removeClass("is-hidden");
 
       // update #welcome and #instructions text
       $("#welcome").text("Who said...");
@@ -36,16 +35,31 @@ $("#start-btn").click(function() {
       clock()
     }
     else {
-      // pull up modal and show score
+      $("#modal").addClass("is-active");
+      $("#playerScore").text(correctAnswers);
+      displayHighScores();
     }
+});
+
+// submit button
+$('#submit-btn').click(function(event){
+  event.preventDefault();
+  let initials = $('#inputName').val().trim();
+  playerScore.initials = initials;
+  playerScore.score = correctAnswers;
+  scoresObj.push(playerScore);
+  $("#modal-footer").addClass("is-hidden");
+  sortHighScores(scoresObj);
+  saveScores();
+  displayHighScores();
 });
 
 // create button handler for kanye button
 $("#kanye-btn").click(function() {
-  $(this).addClass("hide")
-  $("#start-btn").removeClass("hide");
-  $("#someone-else-btn").addClass("hide");
-
+  $(this).addClass("is-hidden")
+  $("#start-btn").removeClass("is-hidden");
+  $("#someone-else-btn").addClass("is-hidden");
+  
   // if kanyeSaidIt is true - DO STUFF
   clearInterval(timer);
   if (kanyeSaidIt === true) {
@@ -55,35 +69,71 @@ $("#kanye-btn").click(function() {
 
 // create button handler for someone-else button
 $("#someone-else-btn").click(function() {
-  $(this).addClass("hide")
-  $("#start-btn").removeClass("hide");
-  $("#someone-else-btn").addClass("hide");
-
+  $(this).addClass("is-hidden")
+  $("#start-btn").removeClass("is-hidden");
+  $("#kanye-btn").addClass("is-hidden");
+  
   // if kanyeSaidIt is false - DO OTHER STUFF
   clearInterval(timer);
   if (kanyeSaidIt === false) {
-     answerIsCorrect();
+    answerIsCorrect();
   }else answerIsWrong();
 });
 
+// close modal button handler
+$('#close').click(function(){
+  $('.modal').removeClass('is-active');
+  location.reload();
+  // currentScore = 0;
+  // playerScore.initials = "";
+  // playerScore.score = 0;
+  // answersLeft = 10;
+  // randomQuote();
+  // kanyeQuote();
+  // $("#start-btn").text("Start");
+  // $("#welcome").text('Welcome to Kanye Guess, the game of "famous" quotes');
+  // $("#instructions").text("An epic quote battle between the greatest minds in history and Kanye West.\nYou will be presented with a quote, then pick if Kanye said it or someone else. You have 10 seconds for each quote. There will be a total of 10 quotes.\nGood luck!");
+});
 
+// function to display high scores to modal
+let displayHighScores = function() {
+  $("#scoresList").children().remove();
+  for (let i = 0; i < scoresObj.length; i++) {
+    let listEl = $("<li>");
+    let initialsEl = $("<span>").text(scoresObj[i].initials);
+    let scoreEl = $("<span>").text(scoresObj[i].score);
+    listEl.append(initialsEl);
+    listEl.append(scoreEl);
+    $("#scoresList").append(listEl);
+  }
+}
+
+// saves scores to localStorage
 var saveScores = function(){
-    localStorage.setItem("savedScores", JSON.stringify(scoreObj));
+  localStorage.setItem("savedScores", JSON.stringify(scoresObj));
 }
 
-
+// loads scores from localStorage
 var loadScores = function(){
-    var loadedScores = JSON.parse(localStorage.getItem(savedScores));
-    if (!loadScores) {
-      scoresObj = [];
-    }
-    else {
-      scoresObj = loadedScores;
-    }
+  var loadedScores = JSON.parse(localStorage.getItem("savedScores"));
+  if (!loadedScores) {
+    scoresObj = [];
+  }
+  else {
+    scoresObj = loadedScores;
+  }
 }
 
+// sorts array
+var sortHighScores = function(highScoresArray) {
+  var newArray = highScoresArray;
+  newArray.sort(function(a, b) {
+      return b.score - a.score;
+  })
+  highScores = newArray;
+}
 
-
+// function to execute when correctly answered
 function answerIsCorrect(){
   if (kanyeSaidIt === true) {
     $("#instructions").text("Kanye West");
@@ -95,6 +145,7 @@ function answerIsCorrect(){
   correctAnswers++;
 }
 
+// function to execute when incorrectly answered
 function answerIsWrong(){
   if (kanyeSaidIt === true) {
     $("#instructions").text("Kanye West");
@@ -204,22 +255,12 @@ function clock() {
       timer = setInterval (countdown,1000);
 }
 
-
-// modal functionality
-
-
-$('#close').click(function(){
-    $('.modal').removeClass('is-active');
-});
-
-=======
 //results
-
 function showResult(){
   let scoreTag = '<span>a You got <p>'+ userScore +'</p> out of <p>'+ questions.length +'</p></span>';
   scoreText.innerHTML = scoreTag; 
 }
 
-
+loadScores();
 randomQuote();
 kanyeQuote();
