@@ -8,10 +8,13 @@ let answersLeft = 10;
 const timeEl = $(".timer");
 let timer;
 let scoresObj = [];
+let isPlaying = false;
 let playerScore = { 
   initials: "", 
   score: 0
 };
+
+
 
 // start button handler function
 $("#start-btn").click(function() {
@@ -32,9 +35,11 @@ $("#start-btn").click(function() {
       kanyeQuote();
       
       //call countdown function put it here just to test functionality.  Should be in kanye button and someone else button
-      clock()
+      clock();
+      isPlaying = true;
     }
     else {
+      isPlaying = false;
       $("#modal").addClass("is-active");
       $("#playerScore").text(correctAnswers);
       displayHighScores();
@@ -80,19 +85,25 @@ $("#someone-else-btn").click(function() {
   }else answerIsWrong();
 });
 
+$("#view-high-scores-btn").click(function() {
+  $("#modal-p").addClass("is-invisible");
+  $("#playerScore").addClass("is-invisible");
+  $("#modal").addClass("is-active");
+  $("#modal-footer").addClass("is-invisible");
+  displayHighScores();
+});
+
 // close modal button handler
 $('#close').click(function(){
-  $('.modal').removeClass('is-active');
-  location.reload();
-  // currentScore = 0;
-  // playerScore.initials = "";
-  // playerScore.score = 0;
-  // answersLeft = 10;
-  // randomQuote();
-  // kanyeQuote();
-  // $("#start-btn").text("Start");
-  // $("#welcome").text('Welcome to Kanye Guess, the game of "famous" quotes');
-  // $("#instructions").text("An epic quote battle between the greatest minds in history and Kanye West.\nYou will be presented with a quote, then pick if Kanye said it or someone else. You have 10 seconds for each quote. There will be a total of 10 quotes.\nGood luck!");
+  if (isPlaying) {
+    $("#modal-p").removeClass("is-invisible");
+    $("#playerScore").removeClass("is-invisible");
+    $("modal-footer").removeClass("is-invisible");
+    $("#modal").removeClass('is-active');
+  }
+  else {
+    location.reload();
+  }
 });
 
 // function to display high scores to modal
@@ -101,7 +112,7 @@ let displayHighScores = function() {
   for (let i = 0; i < scoresObj.length; i++) {
     let listEl = $("<li>");
     let initialsEl = $("<span>").text(scoresObj[i].initials);
-    let scoreEl = $("<span>").text(scoresObj[i].score);
+    let scoreEl = $("<span>").text(" Score: " + scoresObj[i].score);
     listEl.append(initialsEl);
     listEl.append(scoreEl);
     $("#scoresList").append(listEl);
@@ -237,10 +248,17 @@ function kanyeQuote() {
 function countdown(){
   if(timeleft <= 0){
       clearInterval(timer);
-      timeEl.text("Out of Time!");
-      $("#kanye-btn").addClass("hide");
-      $("#someone-else-btn").addClass("hide");
-      $("#start-btn").removeClass("hide");
+      timeEl.text(timeleft);
+      $("#welcome").text("Out of Time!");
+      $("#kanye-btn").addClass("is-hidden");
+      $("#someone-else-btn").addClass("is-hidden");
+      $("#start-btn").removeClass("is-hidden");
+      if (kanyeSaidIt === true) {
+        $("#instructions").text("Kanye West");
+      }
+      else {
+        $("#instructions").text(quoteGardenAuthor);
+      }
   } else {
       timeEl.text(timeleft + " seconds remaining");
       }
