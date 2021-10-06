@@ -23,6 +23,7 @@ $("#start-btn").click(function() {
       $(this).addClass("is-hidden").text("Next");
       $("#kanye-btn").removeClass("is-hidden");
       $("#someone-else-btn").removeClass("is-hidden");
+      $(".timer").removeClass("is-hidden");
 
       // update #welcome and #instructions text
       $("#welcome").text("Who said...");

@@ -22,3 +22,10 @@ header{
     background-color: #3C4F77 !important;
     color: white;
   }
+
+  #view-high-scores-btn {
+      margin-top: 10px;
+  }
+  .timer {
+      text-align: center;
+  }
