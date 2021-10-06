@@ -60,17 +60,19 @@
     <div class="modal-background"></div>
     <div class="modal-card has-background-white py-5 px-5">
       <header class="modal-card-head">
-        <p id="modal-p" class="modal-card-title">
+        <p id="modal-p" class="modal-card-title is-size-6-mobile">
           All Done! Your Score is...
         </p>
         <span id="playerScore" class="modal-card-title"></span>
-        <button id="close" class="delete is-large" aria-label="close"></button>
+        <button id="close" class="delete is-small" aria-label="close"></button>
       </header>
       <section class="modal-card-body py-6">
-        <ol id="scoresList"></ol>
+       <div class="content">
+        <ol type="1" id="scoresList"></ol>
+      </div>  
       </section>
-      <footer class="modal-card-foot is-justify-content-space-around" id="modal-footer">
-        <input class="mx-5 is-size-4" id="inputName" placeholder="Enter Initials" type="text">
+      <footer class="modal-card-foot is-flex is-justify-content-space-between" id="modal-footer">
+        <input class="input mx-5 is-size-4" id="inputName" placeholder="Enter Initials" type="text">
         <button class="is-size-4 mx-5" id="submit-btn" type="submit">Submit</button>
       </footer>
     </div>

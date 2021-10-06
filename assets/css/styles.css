@@ -21,11 +21,19 @@ header{
 .is-primary {
     background-color: #3C4F77 !important;
     color: white;
-  }
+}
 
-  #view-high-scores-btn {
-      margin-top: 10px;
-  }
-  .timer {
-      text-align: center;
-  }
+#view-high-scores-btn {
+    margin-top: 10px;
+ }
+.timer {
+    text-align: center;
+}
+
+.list-item {
+    margin: 3px 2px;
+    background-color:#3C4F77;
+    padding: 5px;
+    color: white;
+    border-radius: 3px;
+}
