@@ -15,32 +15,39 @@
 </head>
 
 <body>
-  <header class>
-    <h1 class="has-text-white is-size-3">Kanye Guess</h1>
-    <p class="has-text-white subtitle timer  ">Time:</p>
-    <div>
-      <a class="has-text-white" href="./highscores.html">View Highscores</a>
-    </div>
-  </header>
-  <main>
-    <section class="hero is-success is-halfheight is-link">
-      <div class="hero-body">
-      </div>
-    </section>
 
-    <section class="container">
+  <!-- header -->
+  <header class>
+    <h1 class="has-text-white is-size-2">Kanye Guess</h1>
+  </header>
+
+  <!-- Hero Section-->
+  <section class="hero is-medium">
+    <div class="hero-body"></div>
+  </section>
+  
+  <!-- main section -->
+  <main>  
+    <section class="container hide">
       <div>
-        <h2 class="py-6 is-size-2 has-text-centered has-text-weight-bold" id="welcome">
-          Welcome to Kanye Guess, the game of "famous" quotes
-        </h2>
-        <p class="has-text-centered" id="instructions">
-          An epic quote battle between the greatest minds in history and Kanye West.
+        <button id="view-high-scores-btn" class="button is-primary">View Highscores</button>
+        <p class="has-text-dark subtitle timer  ">Time:</p>
+      </div>
+      <div>
+        <h2 class="py-6 is-size-3 has-text-centered has-text-weight-bold" id="welcome">Welcome to Kanye Guess, the game
+          of "famous" quotes</h2>
+        <p class="has-text-centered" id="instructions">An epic quote battle between the greatest minds in history and
+          Kanye West.
           <br>
-          You will be presented with a quote, then pick if Kanye said it or someone else. You have 10 seconds for each quote. There will be a total of 10 quotes.
+          You will be presented with a quote, then pick if Kanye said it or someone else. You have 10 seconds.
+          <br>
+          There will be ten quotes total.
           <br>
           Good luck!
         </p>
       </div>
+
+      <!-- buttons -->
       <div class="py-4 has-text-centered btn-container">
         <button id="kanye-btn" class="button is-primary is-hidden">Kanye</button>
         <button id="start-btn" class="button is-primary">Start</button>
@@ -53,31 +60,33 @@
     <div class="modal-background"></div>
     <div class="modal-card has-background-white py-5 px-5">
       <header class="modal-card-head">
-        <p class="modal-card-title">
+        <p id="modal-p" class="modal-card-title">
           All Done! Your Score is...
         </p>
         <span id="playerScore" class="modal-card-title"></span>
         <button id="close" class="delete is-large" aria-label="close"></button>
       </header>
       <section class="modal-card-body py-6">
-        <ul id="scoresList"></ul>
+        <ol id="scoresList"></ol>
       </section>
       <footer class="modal-card-foot is-justify-content-space-around" id="modal-footer">
         <input class="mx-5 is-size-4" id="inputName" placeholder="Enter Initials" type="text">
-        <button class="is-size-4 mx-5" type="submit" id="submit-btn">Submit</button>
+        <button class="is-size-4 mx-5" id="submit-btn" type="submit">Submit</button>
       </footer>
     </div>
   </div>
 
+  <!-- footer-->
   <footer class="card-footer-item">
-    <figure class="image is-16x16px">
+    <figure class="image is-128x128">
       <img src="./assets/css/images/Kanye West Graduation Bear.png">
     </figure>
-    </figure></a>
   </footer>
-
+  <!-- scripts -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"
     integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
   <script src="assets/js/scripts.js"></script>
 </body>
+
 </html>
+<!-- end-->
