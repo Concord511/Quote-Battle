@@ -1,43 +1,96 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300;400&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Merriweather+Sans:wght@300;400&display=swap" rel="stylesheet">
+  <title>Kanye Guess</title>
+</head>
 
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="assets/css/styles.css" />
-    <title>Kanye Guess</title>
-  </head>
-  <body>
-    <header>
-      <h1>Kanye Guess</h1>
-    </header>
-    <main>
-      <hero> 
-          <div>Time:</div>
-      </hero>
-      <section class="container hide">
-        <div>
-          <h2 id="welcome">Welcome to Kanye Guess, the game of "famous" quotes</h2>
-          <p id="instructions">An epic quote battle between the greatest minds in history and Kanye West. 
-              <br>
-              You will be presented with a quote, then pick if Kanye said it or someone else. You have 10 secs. 
-              <br>
-              Good luck!
+<body>
+
+  <!-- header -->
+  <header class>
+    <h1 class="has-text-white is-size-2">Kanye Guess</h1>
+  </header>
+
+  <!-- Hero Section-->
+  <section class="hero is-medium">
+    <div class="hero-body"></div>
+  </section>
+  
+  <!-- main section -->
+  <main>  
+    <section class="container hide">
+      <div class="level">
+        <div class="level-item has-text-centered">
+        <button id="view-high-scores-btn" class="button is-primary">View Highscores</button>
+        </div>
+      </div>
+      <div>
+        <h2 class="py-6 is-size-3 has-text-centered has-text-weight-bold" id="welcome">Welcome to Kanye Guess, the game
+          of "famous" quotes</h2>
+          <p class="has-text-dark subtitle timer is-hidden ">Time:</p>
+        <p class="has-text-centered" id="instructions">An epic quote battle between the greatest minds in history and
+          Kanye West.
+          <br>
+          You will be presented with a quote, then pick if Kanye said it or someone else. You have 10 seconds.
+          <br>
+          There will be ten quotes total.
+          <br>
+          Good luck!
         </p>
-        </div>
-        <div class="btn-container">
-            <button class="hide">Kanye</button>
-            <button>Start</button>
-            <button class="hide">Someone Else</button>
+      </div>
 
-        </div>
+      <!-- buttons -->
+      <div class="py-4 has-text-centered btn-container">
+        <button id="kanye-btn" class="button is-primary is-hidden">Kanye</button>
+        <button id="start-btn" class="button is-primary">Start</button>
+        <button id="someone-else-btn" class="button is-primary is-hidden">Someone Else</button>
+      </div>
+  </main>
+
+  <!-- modal-->
+  <div class="modal" id="modal">
+    <div class="modal-background"></div>
+    <div class="modal-card has-background-white py-5 px-5">
+      <header class="modal-card-head">
+        <p id="modal-p" class="modal-card-title is-size-6-mobile">
+          All Done! Your Score is...
+        </p>
+        <span id="playerScore" class="modal-card-title"></span>
+        <button id="close" class="delete is-small" aria-label="close"></button>
+      </header>
+      <section class="modal-card-body py-6">
+       <div class="content">
+        <ol type="1" id="scoresList"></ol>
+      </div>  
       </section>
-    </main>
-    <footer>
+      <footer class="modal-card-foot is-flex is-justify-content-space-between" id="modal-footer">
+        <input class="input mx-5 is-size-4" id="inputName" placeholder="Enter Initials" type="text">
+        <button class="is-size-4 mx-5" id="submit-btn" type="submit">Submit</button>
+      </footer>
+    </div>
+  </div>
 
-    </footer>
+  <!-- footer-->
+  <footer class="card-footer-item">
+    <figure class="image is-128x128">
+      <img src="./assets/css/images/Kanye West Graduation Bear.png">
+    </figure>
+  </footer>
+  <!-- scripts -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="assets/js/scripts.js"></script>
+</body>
 
-    <script src="assets/js/scripts.js"></script>
-  </body>
 </html>
+<!-- end-->

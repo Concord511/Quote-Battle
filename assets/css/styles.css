@@ -1,0 +1,40 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Merriweather Sans', sans-serif;
+}
+
+header{
+    background: #3C4F77;
+    text-align: center;
+    padding: 10px;
+}
+
+.hero {
+    background: url("./images/kanye-banner_01.jpg");
+    background-size: cover;
+    position: relative;
+
+}
+
+.is-primary {
+    background-color: #3C4F77 !important;
+    color: white;
+}
+
+#view-high-scores-btn {
+    margin-top: 10px;
+ }
+.timer {
+    text-align: center;
+}
+
+.list-item {
+    margin: 3px 2px;
+    background-color:#3C4F77;
+    padding: 5px;
+    color: white;
+    border-radius: 3px;
+}
+
