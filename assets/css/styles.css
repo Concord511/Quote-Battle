@@ -12,7 +12,7 @@ header{
 }
 
 .hero {
-    background: url("./images/kanye-banner_01.jpg");
+    background: url("../images/kanye-banner_01.jpg");
     background-size: cover;
     position: relative;
 
