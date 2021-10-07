@@ -1,4 +1,4 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -25,7 +25,8 @@ header{
 
 #view-high-scores-btn {
     margin-top: 10px;
- }
+}
+
 .timer {
     text-align: center;
 }
@@ -37,4 +38,3 @@ header{
     color: white;
     border-radius: 3px;
 }
-
