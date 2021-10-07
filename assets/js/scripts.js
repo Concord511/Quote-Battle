@@ -41,7 +41,9 @@ $("#start-btn").click(function() {
     }
     else {
       isPlaying = false;
+      $("#modal-p").text("All Done! Your Score is...");
       $("#modal").addClass("is-active");
+    
       $("#playerScore").text(correctAnswers);
       displayHighScores();
     }
@@ -86,8 +88,11 @@ $("#someone-else-btn").click(function() {
   }else answerIsWrong();
 });
 
+
+// view highscores button 
+
 $("#view-high-scores-btn").click(function() {
-  $("#modal-p").addClass("is-invisible");
+  $("#modal-p").text("High Scores");
   $("#playerScore").addClass("is-invisible");
   $("#modal").addClass("is-active");
   $("#modal-footer").addClass("is-invisible");
@@ -112,6 +117,7 @@ let displayHighScores = function() {
   $("#scoresList").children().remove();
   for (let i = 0; i < scoresObj.length; i++) {
     let listEl = $("<li>");
+    listEl.addClass("list-item is-flex is-justify-content-space-between");
     let initialsEl = $("<span>").text(scoresObj[i].initials);
     let scoreEl = $("<span>").text(" Score: " + scoresObj[i].score);
     listEl.append(initialsEl);

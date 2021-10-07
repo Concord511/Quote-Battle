@@ -20,6 +20,24 @@
  • Have a quality README
  • Must add project to personal portfolio
 
+ 2. User Story
+       AS A Game Player
+       I WANT to take a timed quiz on Famous Quotes that stores high scores
+       SO THAT I can gauge my historical/modern knowledge compared to my peers
+
+3. Acceptance Criteria
+       GIVEN I am taking the Kanye Guess quiz
+       WHEN I click the start button
+       THEN a timer starts and I am presented with a quote
+       WHEN I click my choice
+       THEN I am presented with another quote
+       WHEN I answer a question correctly
+       THEN my score is incremented
+       WHEN all questions are answered 
+       THEN the game is over
+       WHEN the game is over
+       THEN I can save my initials and score
+
  4. created a repository on GitHub at URL https://github.com/Concord511/Quote-Battle
 
  5. This is the address of the live URL 
