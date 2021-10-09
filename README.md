@@ -37,10 +37,10 @@
        WHEN the game is over
        THEN I can save my initials and score
 
-4. created a repository on GitHub at URL https://github.com/Concord511/Quote-Battle
+### 4. created a repository on GitHub at URL https://github.com/Concord511/Quote-Battle
 
-5. This is the address of the live URL: https://concord511.github.io/Quote-Battle/
+### 5. This is the address of the live URL: https://concord511.github.io/Quote-Battle/
 
-6. Here is a screenshot of the finished website.
+### 6. Here is a screenshot of the finished website.
 
 ![Kanye Guess](./assets/images/Quote-Battle.png)
